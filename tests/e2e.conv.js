@@ -1,4 +1,4 @@
-﻿/*
+﻿
 import { Selector } from 'testcafe';
 
 fixture`ConversionController End-to-End Test`
@@ -18,4 +18,4 @@ test('Should convert currency successfully', async t => {
         .expect(/^[0-9.]+$/.test(Selector('response-body').innerText)).ok();
     
 });
-*/
+

@@ -1,4 +1,4 @@
-﻿/*
+﻿
 import { Selector } from 'testcafe';
 
 fixture`HistoryController End-to-End Test`
@@ -31,4 +31,4 @@ test('Should fetch conversion history successfully', async t => {
         
     }
 });
-*/
+
