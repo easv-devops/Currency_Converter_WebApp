@@ -1,0 +1,25 @@
+﻿version: '3.3'
+
+services:
+  postgresql:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_SERVER=${SERVER}
+      - POSTGRES_PASSWORD=${PASSWORD}
+      - POSTGRES_USER=${USER}
+      - POSTGRES_DATABASE=${DATABASE}
+      - POSTGRES_URL=${URL}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db/data:/var/lib/postgresql/data
+
+#  flyway:
+#    image: flyway/flyway
+#    command: migrate
+#    volumes:
+#      - ./db:/flyway/sql
+#      - ./db:/flyway/conf
+#    depends_on: 
+#      - postgresql
