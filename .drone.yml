@@ -3,12 +3,11 @@ type: docker
 name: integration
 
 steps:
-  - name: build
-    image: mcr.microsoft.com/dotnet/sdk
+  - name: code_analysis
+    image: boulundeasv/dotnet-sdk-with-java
     commands:
+      - dotnet sonarscanner begin /k:"easv-devops_Currency_Converter_WebApp_AY69MDlJEVvRW2O60Ee5" /d:sonar.host.url="http://sonar.setgo.dk:9000"  /d:sonar.token="sqp_10060f092a84dbde0950c1e848461da4f115c407"
       - dotnet build
+      - dotnet sonarscanner end /d:sonar.token="sqp_10060f092a84dbde0950c1e848461da4f115c407"
 
-  - name: tests
-    image: mcr.microsoft.com/dotnet/sdk
-    commands:
-      - dotnet test
+ 
