@@ -1,0 +1,19 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
+  &lt;Assembly Path="C:\Users\doini\3rd semester\Home_Work_Doina\CurrencyConverterWebApp\test\bin\Debug\net8.0\service.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Users\doini\3rd semester\Home_Work_Doina\CurrencyConverterWebApp\test\bin\Debug\net8.0\api.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Users\doini\3rd semester\Home_Work_Doina\CurrencyConverterWebApp\test\bin\Debug\net8.0\test.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Users\doini\3rd semester\Home_Work_Doina\CurrencyConverterWebApp\test\bin\Debug\net8.0\testcentric.engine.metadata.dll" /&gt;&#xD;
+&lt;/AssemblyExplorer&gt;</s:String>
+	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\doini\AppData\Local\JetBrains\Rider2023.2\resharper-host\temp\Rider\vAny\CoverageData\_CurrencyConverterWebApp.-1217843702\Snapshot\snapshot.utdcvr</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=5d97e0ed_002D263f_002D4b5e_002D9ebd_002D28914ed88245/@EntryIndexedValue">&lt;SessionState ContinuousTestingIsOn="True" ContinuousTestingMode="1" IsActive="True" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Solution /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f360ca5b_002Dfe6b_002D4937_002Db2f9_002De1270c7c834c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="UnitTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::FDD99DE7-3957-42E1-BEFA-7E5EECADAAB7::net8.0::infrastructure.Tests.Repository.ConvRepositoryTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestRunner/EnvironmentVariablesIndexed/=pgconn/@EntryIndexedValue">postgres://qzwptyqr:zIKyzqcTpJv4Zjg_iVVNTySWm16U7SK8@cornelius.db.elephantsql.com/qzwptyqr</s:String>
+	<s:Boolean x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestRunner/EnvironmentVariablesIndexed/=RESHARPER_005FHOST_005FVERSION/@EntryIndexRemoved">True</s:Boolean>
+	<s:Boolean x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestRunner/EnvironmentVariablesIndexed/=RESHARPER_005FHOST/@EntryIndexRemoved">True</s:Boolean></wpf:ResourceDictionary>

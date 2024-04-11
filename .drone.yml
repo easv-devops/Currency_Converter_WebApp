@@ -6,7 +6,8 @@ steps:
   - name: code_analysis
     image: boulundeasv/dotnet-sdk-with-java
     commands:
-      - dotnet sonarscanner begin /k:easv-devops_Currency_Converter_WebApp_AY69MDlJEVvRW2O60Ee5 /d:sonar.host.url="http://sonar.setgo.dk:9000" /d:sonar.token="sqp_10060f092a84dbde0950c1e848461da4f115c407" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml /d:sonar.qualitygate.wait=true
+      - dotnet sonarscanner begin /k:easv-devops_Currency_Converter_WebApp_AY69MDlJEVvRW2O60Ee5 /d:sonar.host.url="http://sonar.setgo.dk:9000" /d:sonar.token="sqp_10060f092a84dbde0950c1e848461da4f115c407"
+        /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml /d:sonar.qualitygate.wait=true
       - dotnet build --no-incremental
       - dotnet-coverage collect "dotnet test" -f xml -o "coverage.xml"
       - dotnet sonarscanner end /d:sonar.token="sqp_10060f092a84dbde0950c1e848461da4f115c407"

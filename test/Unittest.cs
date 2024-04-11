@@ -1,71 +1,51 @@
-﻿namespace test;
-using api.Controllers;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Moq;
-using NUnit.Framework;
-using service;
+﻿
+using infrastructure.Models;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
+using Dapper;
+using FluentAssertions;
+using Newtonsoft.Json;
+using test;
 
-[TestFixture]
-public class Unittest
+namespace infrastructure.Tests.Repository
 {
-    
-    private ConversionController _conversionController;
-    private Mock<ILogger<ConversionController>> _loggerMock;
-    private Mock<ConverterService> _converterServiceMock;
-    private Mock<HistoryService> _historyServiceMock;
-
-    [SetUp]
-    public void Setup()
+    [TestFixture]
+    public class ConvRepositoryTests
     {
-        _loggerMock = new Mock<ILogger<ConversionController>>();
-        _converterServiceMock = new Mock<ConverterService>();
-        _historyServiceMock = new Mock<HistoryService>();
-        _conversionController = new ConversionController(_loggerMock.Object, _converterServiceMock.Object, _historyServiceMock.Object);
-    }
-
-    [TestCase(-100.0, "USD", "EUR", "Invalid amount")]
-    [TestCase(100.0, "USD", "EUR", 500)] // Testing exception scenario
-    [TestCase(100.0, "USD", "EUR", 85.0)] // Testing valid scenario
-    public void ConvertCurrency_ReturnsExpectedResult(decimal amount, string fromCurrency, string toCurrency, object expectedResult)
-    {
-        if (expectedResult is string expectedErrorMessage)
+        [TestCase("USD", "EUR", 100, 85)]
+        [TestCase("EUR", "GBP", 200, 170)]
+        [TestCase("GBP", "JPY", 150, 23250)]
+        public async Task AddConversion_SuccessfullyAddsConversion(
+            string sourcecurrency, string targetcurrency, decimal amount,
+            decimal convertedamount)
         {
-            // Arrange for invalid amount scenario
-            // Act
-            IActionResult result = _conversionController.ConvertCurrency(amount, fromCurrency, toCurrency);
+            // Arrange
+            Helper.TriggerRebuild();
 
-            // Assert
-            Assert.That(result, Is.TypeOf<BadRequestObjectResult>());
-            var badRequestResult = result as BadRequestObjectResult;
-            Assert.That(badRequestResult.Value, Is.EqualTo(expectedErrorMessage));
-        }
-        else if (expectedResult is int expectedStatusCode)
-        {
-            // Arrange for exception scenario
-            _converterServiceMock.Setup(x => x.ConvertCurrency(amount, fromCurrency, toCurrency)).Throws(new Exception("Some error message"));
+            // Create a new instance of ConversionHistory
+            var history = new ConversionHistory
+            {
+                Id = 800,
+                SourceCurrency = sourcecurrency,
+                TargetCurrency = targetcurrency,
+                Amount = amount,
+                ConvertedAmount = convertedamount,
+                Timestamp = DateTime.Now
+            };
 
             // Act
-            IActionResult result = _conversionController.ConvertCurrency(amount, fromCurrency, toCurrency);
+            var httpResponse = await new HttpClient().PostAsJsonAsync
+                (Helper.ApiBaseUrl + "/history", history);
+            var boxFromResponseBody =
+                JsonConvert.DeserializeObject<ConversionHistory>
+                    (await httpResponse.RequestMessage?.Content?.ReadAsStringAsync()!);
 
             // Assert
-            Assert.That(result, Is.TypeOf<StatusCodeResult>());
-            var statusCodeResult = result as StatusCodeResult;
-            Assert.That(statusCodeResult.StatusCode, Is.EqualTo(expectedStatusCode));
-        }
-        else
-        {
-            // Arrange for valid amount scenario
-            decimal expectedValue = Convert.ToDecimal(expectedResult);
-            _converterServiceMock.Setup(x => x.ConvertCurrency(amount, fromCurrency, toCurrency)).Returns(expectedValue);
+            await using var conn = await Helper.DataSource.OpenConnectionAsync();
+            var result = await conn.QueryFirstOrDefaultAsync<ConversionHistory>("SELECT * FROM public.conversionhistory;");
+            
 
-            // Act
-            IActionResult result = _conversionController.ConvertCurrency(amount, fromCurrency, toCurrency);
-
-            // Assert
-            Assert.That(result, Is.TypeOf<OkObjectResult>());
-            var okResult = result as OkObjectResult;
-            Assert.That(okResult.Value, Is.EqualTo(expectedValue));
+           
         }
     }
 }
