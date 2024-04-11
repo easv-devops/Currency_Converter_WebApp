@@ -61,24 +61,6 @@ EXCEPTION:
 
     public static void TriggerRebuild()
     {
-        using (var conn = DataSource.OpenConnection()) ;
-        /*{
-            try
-            {
-                conn.Execute(RebuildScript);
-            }
-            catch (Exception e)
-            {
-                throw new Exception($@"
-THERE WAS AN ERROR REBUILDING THE DATABASE.
-
-Check the following: Are you running the postgres DB at Amazon Web Services in Stockholm?
-
-Best regards, Alex.
-(Below is the inner exception)", e);
-            }
-        }*/
+        DataSource.OpenConnection();
     }
-
-
 }
