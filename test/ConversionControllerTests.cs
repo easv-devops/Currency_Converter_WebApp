@@ -31,7 +31,6 @@ namespace test
             decimal amount = 100;
             string? fromCurrency = "INVALID";
             string? toCurrency = "EUR";
-
             // Act
             var result = _controller.ConvertCurrency(amount, fromCurrency, toCurrency);
 

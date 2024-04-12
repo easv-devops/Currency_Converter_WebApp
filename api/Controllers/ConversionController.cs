@@ -23,7 +23,7 @@ public class ConversionController : ControllerBase
 
     [HttpGet]
     [Route("/conversion/money")]
-    public IActionResult ConvertCurrency(decimal amount, string fromCurrency, string toCurrency)
+    public IActionResult ConvertCurrency(decimal amount, string? fromCurrency, string? toCurrency)
     {
         try
         {
