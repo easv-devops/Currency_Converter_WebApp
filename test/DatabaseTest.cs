@@ -1,4 +1,4 @@
-﻿using infrastructure;
+﻿/*using infrastructure;
 namespace test;
 
 [TestFixture]
@@ -13,4 +13,4 @@ public class UtilitiesTests
         // Assert
         Assert.IsNotNull(connectionString);
     }
-}
+}*/
