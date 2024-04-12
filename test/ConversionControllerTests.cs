@@ -36,10 +36,8 @@ namespace test
 
             // Assert
             Assert.IsInstanceOf<OkObjectResult>(result);
-            var okResult = result as OkObjectResult;
-            Assert.IsNotNull(okResult);
-            Assert.AreEqual(200, okResult.StatusCode);
         }
+
 
         [Test]
         public void ConvertCurrency_ShouldReturnBadRequest_WhenInvalidCurrencyIsProvided()
