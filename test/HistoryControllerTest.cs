@@ -1,4 +1,5 @@
-﻿using api.Controllers;
+﻿using NUnit.Framework;
+using api.Controllers;
 using api.Helper;
 using api.TransferModels;
 using infrastructure.Models;
@@ -7,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 using service;
+using System;
+using System.Collections.Generic;
 
 namespace test
 {
@@ -22,7 +25,7 @@ namespace test
         [SetUp]
         public void Setup()
         {
-            _historyServiceMock = new Mock<HistoryService>();
+            _historyServiceMock = new Mock<HistoryService>(); // Mock HistoryService
             _responseHelperMock = new Mock<ResponseHelper>();
             _httpContextMock = new Mock<HttpContext>();
             _loggerMock = new Mock<ILogger<HistoryController>>();
@@ -33,7 +36,7 @@ namespace test
                 HttpContext = _httpContextMock.Object
             };
         }
-        
+
         [Test]
         public void GetAllHistory_ShouldReturnSuccessResponseDto_WhenHistoriesExist()
         {
@@ -86,6 +89,7 @@ namespace test
                     Timestamp = DateTime.Now
                 },
             };
+
             _historyServiceMock.Setup(service => service.GetAllHistories()).Returns(histories);
 
             var expectedResponseDto = new ResponseDto("Conversion history fetched successfully")
@@ -94,15 +98,16 @@ namespace test
             };
 
             _responseHelperMock.Setup(helper =>
-                    helper.Success(_httpContextMock.Object, 200, "Conversion history fetched successfully", histories))
+                helper.Success(_httpContextMock.Object, 200, "Conversion history fetched successfully", histories))
                 .Returns(expectedResponseDto);
 
             // Act
             var response = _controller.GetAllHistory();
 
             // Assert
-            Assert.IsInstanceOf<ResponseDto>(response);
-            Assert.AreEqual(expectedResponseDto, response);
+            Assert.IsNotNull(response); // Ensure response is not null
+            Assert.IsTrue(response.MessageToClient == "Conversion history fetched successfully");
+            Assert.AreEqual(histories, response.ResponseData); // Compare response data directly
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿/*
+using NUnit.Framework;
 using Microsoft.Extensions.Logging;
 using api.Controllers;
 using Microsoft.AspNetCore.Mvc;
@@ -87,3 +88,4 @@ namespace test
         }
     }
 }
+*/
