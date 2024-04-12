@@ -1,47 +1,49 @@
 ﻿using api.TransferModels;
+using NUnit.Framework;
 
-namespace test;
-
-[TestFixture]
-public class ResponseDtoTests
+namespace test
 {
-    [Test]
-    public void ResponseDto_WithMessage_CorrectlyInitialized()
+    [TestFixture]
+    public class ResponseDtoTests
     {
-        // Arrange
-        string expectedMessage = "Test message";
+        [Test]
+        public void ResponseDto_WithMessage_CorrectlyInitialized()
+        {
+            // Arrange
+            string expectedMessage = "Test message";
 
-        // Act
-        var responseDto = new ResponseDto(expectedMessage);
+            // Act
+            var responseDto = new ResponseDto(expectedMessage);
 
-        // Assert
-        Assert.AreEqual(expectedMessage, responseDto.MessageToClient);
-        Assert.IsNull(responseDto.ResponseData);
-    }
+            // Assert
+            Assert.That(responseDto.MessageToClient, Is.EqualTo(expectedMessage));
+            Assert.That(responseDto.ResponseData, Is.Null); 
+        }
 
-    [Test]
-    public void ResponseDto_DefaultConstructor_CorrectlyInitialized()
-    {
-        // Arrange & Act
-        var responseDto = new ResponseDto();
+        [Test]
+        public void ResponseDto_DefaultConstructor_CorrectlyInitialized()
+        {
+            // Arrange & Act
+            var responseDto = new ResponseDto();
 
-        // Assert
-        Assert.IsNull(responseDto.MessageToClient);
-        Assert.IsNull(responseDto.ResponseData);
-    }
+            // Assert
+            Assert.That(responseDto.MessageToClient, Is.Null);
+            Assert.That(responseDto.ResponseData, Is.Null); 
+        }
 
-    [Test]
-    public void ResponseDto_SetResponseData_CorrectlySet()
-    {
-        // Arrange
-        var responseData = new { Value = "Test" };
+        [Test]
+        public void ResponseDto_SetResponseData_CorrectlySet()
+        {
+            // Arrange
+            var responseData = new { Value = "Test" };
 
-        // Act
-        var responseDto = new ResponseDto();
-        responseDto.ResponseData = responseData;
+            // Act
+            var responseDto = new ResponseDto();
+            responseDto.ResponseData = responseData;
 
-        // Assert
-        Assert.IsNull(responseDto.MessageToClient);
-        Assert.AreEqual(responseData, responseDto.ResponseData);
+            // Assert
+            Assert.That(responseDto.MessageToClient, Is.Null); 
+            Assert.That(responseDto.ResponseData, Is.EqualTo(responseData));
+        }
     }
 }
