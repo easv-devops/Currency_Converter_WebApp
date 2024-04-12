@@ -1,51 +1,54 @@
-﻿using infrastructure.Models;
+﻿using NUnit.Framework;
+using System;
+using infrastructure.Models;
 
-namespace test;
-
-public class ModelTest
+namespace test
 {
-    [TestFixture]
-    public class ConversionHistoryTests
+    public class ModelTest
     {
-        [Test]
-        public void Properties_InitializedCorrectly()
+        [TestFixture]
+        public class ConversionHistoryTests
         {
-            // Arrange & Act
-            var conversionHistory = new ConversionHistory();
-
-            // Assert
-            Assert.AreEqual(0, conversionHistory.Id);
-            Assert.IsNull(conversionHistory.SourceCurrency);
-            Assert.IsNull(conversionHistory.TargetCurrency);
-            Assert.AreEqual(0, conversionHistory.Amount);
-            Assert.AreEqual(0, conversionHistory.ConvertedAmount);
-            Assert.AreEqual(default(DateTime), conversionHistory.Timestamp);
-        }
-
-        [Test]
-        public void Properties_CanBeSet()
-        {
-            // Arrange
-            var timestamp = DateTime.Now;
-
-            // Act
-            var conversionHistory = new ConversionHistory
+            [Test]
+            public void Properties_InitializedCorrectly()
             {
-                Id = 1,
-                SourceCurrency = "USD",
-                TargetCurrency = "EUR",
-                Amount = 100,
-                ConvertedAmount = 93,
-                Timestamp = timestamp
-            };
+                // Arrange & Act
+                var conversionHistory = new ConversionHistory();
 
-            // Assert
-            Assert.AreEqual(1, conversionHistory.Id);
-            Assert.AreEqual("USD", conversionHistory.SourceCurrency);
-            Assert.AreEqual("EUR", conversionHistory.TargetCurrency);
-            Assert.AreEqual(100, conversionHistory.Amount);
-            Assert.AreEqual(93, conversionHistory.ConvertedAmount);
-            Assert.AreEqual(timestamp, conversionHistory.Timestamp);
+                // Assert
+                Assert.That(conversionHistory.Id, Is.EqualTo(0));
+                Assert.That(conversionHistory.SourceCurrency, Is.Null);
+                Assert.That(conversionHistory.TargetCurrency, Is.Null);
+                Assert.That(conversionHistory.Amount, Is.EqualTo(0));
+                Assert.That(conversionHistory.ConvertedAmount, Is.EqualTo(0));
+                Assert.That(conversionHistory.Timestamp, Is.EqualTo(default(DateTime)));
+            }
+
+            [Test]
+            public void Properties_CanBeSet()
+            {
+                // Arrange
+                var timestamp = DateTime.Now;
+
+                // Act
+                var conversionHistory = new ConversionHistory
+                {
+                    Id = 1,
+                    SourceCurrency = "USD",
+                    TargetCurrency = "EUR",
+                    Amount = 100,
+                    ConvertedAmount = 93,
+                    Timestamp = timestamp
+                };
+
+                // Assert
+                Assert.That(conversionHistory.Id, Is.EqualTo(1));
+                Assert.That(conversionHistory.SourceCurrency, Is.EqualTo("USD"));
+                Assert.That(conversionHistory.TargetCurrency, Is.EqualTo("EUR"));
+                Assert.That(conversionHistory.Amount, Is.EqualTo(100));
+                Assert.That(conversionHistory.ConvertedAmount, Is.EqualTo(93));
+                Assert.That(conversionHistory.Timestamp, Is.EqualTo(timestamp));
+            }
         }
     }
 }
