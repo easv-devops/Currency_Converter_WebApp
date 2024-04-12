@@ -1,5 +1,5 @@
-﻿using api.TransferModels;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using api.TransferModels;
 
 namespace test
 {
@@ -16,8 +16,11 @@ namespace test
             var responseDto = new ResponseDto(expectedMessage);
 
             // Assert
-            Assert.That(responseDto.MessageToClient, Is.EqualTo(expectedMessage));
-            Assert.That(responseDto.ResponseData, Is.Null); 
+            Assert.Multiple(() =>
+            {
+                Assert.AreEqual(expectedMessage, responseDto.MessageToClient);
+                Assert.IsNull(responseDto.ResponseData);
+            });
         }
 
         [Test]
@@ -27,8 +30,11 @@ namespace test
             var responseDto = new ResponseDto();
 
             // Assert
-            Assert.That(responseDto.MessageToClient, Is.Null);
-            Assert.That(responseDto.ResponseData, Is.Null); 
+            Assert.Multiple(() =>
+            {
+                Assert.IsNull(responseDto.MessageToClient);
+                Assert.IsNull(responseDto.ResponseData);
+            });
         }
 
         [Test]
@@ -42,8 +48,11 @@ namespace test
             responseDto.ResponseData = responseData;
 
             // Assert
-            Assert.That(responseDto.MessageToClient, Is.Null); 
-            Assert.That(responseDto.ResponseData, Is.EqualTo(responseData));
+            Assert.Multiple(() =>
+            {
+                Assert.IsNull(responseDto.MessageToClient);
+                Assert.AreEqual(responseData, responseDto.ResponseData);
+            });
         }
     }
 }
