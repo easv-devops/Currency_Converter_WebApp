@@ -18,8 +18,8 @@ namespace test
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.AreEqual(expectedMessage, responseDto.MessageToClient);
-                Assert.IsNull(responseDto.ResponseData);
+                Assert.That(responseDto.MessageToClient, Is.EqualTo(expectedMessage));
+                Assert.That(responseDto.ResponseData, Is.Null);
             });
         }
 
@@ -32,8 +32,8 @@ namespace test
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.IsNull(responseDto.MessageToClient);
-                Assert.IsNull(responseDto.ResponseData);
+                Assert.That(responseDto.MessageToClient, Is.Null);
+                Assert.That(responseDto.ResponseData, Is.Null);
             });
         }
 
@@ -50,8 +50,8 @@ namespace test
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.IsNull(responseDto.MessageToClient);
-                Assert.AreEqual(responseData, responseDto.ResponseData);
+                Assert.That(responseDto.MessageToClient, Is.Null);
+                Assert.That(responseDto.ResponseData, Is.EqualTo(responseData));
             });
         }
     }
