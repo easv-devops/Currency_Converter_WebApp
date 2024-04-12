@@ -18,7 +18,7 @@ namespace test
         {
             var logger = new Microsoft.Extensions.Logging.Abstractions.NullLogger<ConversionController>();
             var converterService = new ConverterService();
-            var historyService = new HistoryService(new ConvRepository(null));
+            var historyService = new HistoryService(new ConvRepository(null!));
 
             _controller = new ConversionController(logger, converterService, historyService);
         }
@@ -29,8 +29,8 @@ namespace test
         {
             // Arrange
             decimal amount = 100;
-            string fromCurrency = "INVALID";
-            string toCurrency = "EUR";
+            string? fromCurrency = "INVALID";
+            string? toCurrency = "EUR";
 
             // Act
             var result = _controller.ConvertCurrency(amount, fromCurrency, toCurrency);
@@ -39,8 +39,9 @@ namespace test
             Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
             var badRequestResult = result as BadRequestObjectResult;
             Assert.That(badRequestResult, Is.Not.Null);
-            Assert.AreEqual(400, badRequestResult?.StatusCode);
+            Assert.That(badRequestResult.StatusCode, Is.EqualTo(400));
         }
+
 
 
         [Test]
@@ -48,8 +49,8 @@ namespace test
         {
             // Arrange
             decimal amount = 100;
-            string fromCurrency = null;
-            string toCurrency = "EUR";
+            string? fromCurrency = null;
+            string? toCurrency = "EUR";
 
             // Act
             var result = _controller.ConvertCurrency(amount, fromCurrency, toCurrency);
@@ -58,7 +59,7 @@ namespace test
             Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
             var badRequestResult = result as BadRequestObjectResult;
             Assert.That(badRequestResult, Is.Not.Null);
-            Assert.AreEqual(400, badRequestResult?.StatusCode);
+            Assert.That(badRequestResult.StatusCode, Is.EqualTo(400));
         }
 
         [Test]
@@ -66,8 +67,8 @@ namespace test
         {
             // Arrange
             decimal amount = 100;
-            string fromCurrency = "USD";
-            string toCurrency = null;
+            string? fromCurrency = "USD";
+            string? toCurrency = null;
 
             // Act
             var result = _controller.ConvertCurrency(amount, fromCurrency, toCurrency);
@@ -76,7 +77,7 @@ namespace test
             Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
             var badRequestResult = result as BadRequestObjectResult;
             Assert.That(badRequestResult, Is.Not.Null);
-            Assert.AreEqual(400, badRequestResult?.StatusCode);
+            Assert.That(badRequestResult.StatusCode, Is.EqualTo(400));
         }
 
         [TearDown]
