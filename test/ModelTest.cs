@@ -16,12 +16,15 @@ namespace test
                 var conversionHistory = new ConversionHistory();
 
                 // Assert
-                Assert.That(conversionHistory.Id, Is.EqualTo(0));
-                Assert.That(conversionHistory.SourceCurrency, Is.Null);
-                Assert.That(conversionHistory.TargetCurrency, Is.Null);
-                Assert.That(conversionHistory.Amount, Is.EqualTo(0));
-                Assert.That(conversionHistory.ConvertedAmount, Is.EqualTo(0));
-                Assert.That(conversionHistory.Timestamp, Is.EqualTo(default(DateTime)));
+                Assert.Multiple(() =>
+                {
+                    Assert.That(conversionHistory.Id, Is.EqualTo(0));
+                    Assert.That(conversionHistory.SourceCurrency, Is.Null);
+                    Assert.That(conversionHistory.TargetCurrency, Is.Null);
+                    Assert.That(conversionHistory.Amount, Is.EqualTo(0));
+                    Assert.That(conversionHistory.ConvertedAmount, Is.EqualTo(0));
+                    Assert.That(conversionHistory.Timestamp, Is.EqualTo(default(DateTime)));
+                });
             }
 
             [Test]
@@ -42,12 +45,15 @@ namespace test
                 };
 
                 // Assert
-                Assert.That(conversionHistory.Id, Is.EqualTo(1));
-                Assert.That(conversionHistory.SourceCurrency, Is.EqualTo("USD"));
-                Assert.That(conversionHistory.TargetCurrency, Is.EqualTo("EUR"));
-                Assert.That(conversionHistory.Amount, Is.EqualTo(100));
-                Assert.That(conversionHistory.ConvertedAmount, Is.EqualTo(93));
-                Assert.That(conversionHistory.Timestamp, Is.EqualTo(timestamp));
+                Assert.Multiple(() =>
+                {
+                    Assert.That(conversionHistory.Id, Is.EqualTo(1));
+                    Assert.That(conversionHistory.SourceCurrency, Is.EqualTo("USD"));
+                    Assert.That(conversionHistory.TargetCurrency, Is.EqualTo("EUR"));
+                    Assert.That(conversionHistory.Amount, Is.EqualTo(100));
+                    Assert.That(conversionHistory.ConvertedAmount, Is.EqualTo(93));
+                    Assert.That(conversionHistory.Timestamp, Is.EqualTo(timestamp));
+                });
             }
         }
     }
