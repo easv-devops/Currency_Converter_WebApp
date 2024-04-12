@@ -19,6 +19,8 @@ public class ConversionController : ControllerBase
         _historyService = historyService;
     }
     
+
+
     [HttpGet]
     [Route("/conversion/money")]
     public IActionResult ConvertCurrency(decimal amount, string fromCurrency, string toCurrency)
@@ -52,6 +54,7 @@ public class ConversionController : ControllerBase
         }
     }
 }
+
 
 
     

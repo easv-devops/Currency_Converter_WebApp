@@ -11,6 +11,7 @@ public class HistoryService
     {
         _convRepository = convRepository;
     }
+    
    
     public List<ConversionHistory> GetAllHistories()
     {

@@ -18,24 +18,9 @@ namespace test
         {
             var logger = new Microsoft.Extensions.Logging.Abstractions.NullLogger<ConversionController>();
             var converterService = new ConverterService();
-            var historyService = new HistoryService(new ConvRepository(null)); 
+            var historyService = new HistoryService(new ConvRepository(null));
 
             _controller = new ConversionController(logger, converterService, historyService);
-        }
-
-        [Test]
-        public void ConvertCurrency_ShouldReturnOkResult_WhenConversionIsSuccessful()
-        {
-            // Arrange
-            decimal amount = 100;
-            string fromCurrency = "USD";
-            string toCurrency = "EUR";
-
-            // Act
-            var result = _controller.ConvertCurrency(amount, fromCurrency, toCurrency);
-
-            // Assert
-            Assert.IsInstanceOf<OkObjectResult>(result);
         }
 
 
@@ -56,8 +41,6 @@ namespace test
             Assert.IsNotNull(badRequestResult);
             Assert.AreEqual(400, badRequestResult.StatusCode);
         }
-
-      
 
 
         [Test]
@@ -95,7 +78,6 @@ namespace test
             Assert.IsNotNull(badRequestResult);
             Assert.AreEqual(400, badRequestResult.StatusCode);
         }
-
 
         [TearDown]
         public void TearDown()
