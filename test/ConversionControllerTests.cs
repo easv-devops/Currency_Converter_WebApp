@@ -36,10 +36,10 @@ namespace test
             var result = _controller.ConvertCurrency(amount, fromCurrency, toCurrency);
 
             // Assert
-            Assert.IsInstanceOf<BadRequestObjectResult>(result);
+            Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
             var badRequestResult = result as BadRequestObjectResult;
-            Assert.IsNotNull(badRequestResult);
-            Assert.AreEqual(400, badRequestResult.StatusCode);
+            Assert.That(badRequestResult, Is.Not.Null);
+            Assert.AreEqual(400, badRequestResult?.StatusCode);
         }
 
 
@@ -55,10 +55,10 @@ namespace test
             var result = _controller.ConvertCurrency(amount, fromCurrency, toCurrency);
 
             // Assert
-            Assert.IsInstanceOf<BadRequestObjectResult>(result);
+            Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
             var badRequestResult = result as BadRequestObjectResult;
-            Assert.IsNotNull(badRequestResult);
-            Assert.AreEqual(400, badRequestResult.StatusCode);
+            Assert.That(badRequestResult, Is.Not.Null);
+            Assert.AreEqual(400, badRequestResult?.StatusCode);
         }
 
         [Test]
@@ -73,10 +73,10 @@ namespace test
             var result = _controller.ConvertCurrency(amount, fromCurrency, toCurrency);
 
             // Assert
-            Assert.IsInstanceOf<BadRequestObjectResult>(result);
+            Assert.That(result, Is.InstanceOf<BadRequestObjectResult>());
             var badRequestResult = result as BadRequestObjectResult;
-            Assert.IsNotNull(badRequestResult);
-            Assert.AreEqual(400, badRequestResult.StatusCode);
+            Assert.That(badRequestResult, Is.Not.Null);
+            Assert.AreEqual(400, badRequestResult?.StatusCode);
         }
 
         [TearDown]
