@@ -8,8 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 using service;
-using System;
-using System.Collections.Generic;
 
 namespace test
 {
@@ -25,7 +23,7 @@ namespace test
         [SetUp]
         public void Setup()
         {
-            _historyServiceMock = new Mock<HistoryService>(); // Mock HistoryService
+            _historyServiceMock = new Mock<HistoryService>();
             _responseHelperMock = new Mock<ResponseHelper>();
             _httpContextMock = new Mock<HttpContext>();
             _loggerMock = new Mock<ILogger<HistoryController>>();
@@ -36,6 +34,8 @@ namespace test
                 HttpContext = _httpContextMock.Object
             };
         }
+
+
 
         [Test]
         public void GetAllHistory_ShouldReturnSuccessResponseDto_WhenHistoriesExist()
@@ -98,7 +98,7 @@ namespace test
             };
 
             _responseHelperMock.Setup(helper =>
-                helper.Success(_httpContextMock.Object, 200, "Conversion history fetched successfully", histories))
+                    helper.Success(It.IsAny<HttpContext>(), 200, "Conversion history fetched successfully", histories))
                 .Returns(expectedResponseDto);
 
             // Act
@@ -106,7 +106,7 @@ namespace test
 
             // Assert
             Assert.IsNotNull(response); // Ensure response is not null
-            Assert.IsTrue(response.MessageToClient == "Conversion history fetched successfully");
+            Assert.AreEqual("Conversion history fetched successfully", response.MessageToClient);
             Assert.AreEqual(histories, response.ResponseData); // Compare response data directly
         }
     }
