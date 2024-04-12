@@ -1,25 +1,60 @@
-﻿version: '3.3'
+﻿
+version: '3.3'
 
 services:
-  postgresql:
+  postgres-database:
     image: postgres:latest
     restart: always
+    volumes:
+      - ./db/data:/var/lib/postgresql
     environment:
-      - POSTGRES_SERVER=${SERVER}
-      - POSTGRES_PASSWORD=${PASSWORD}
-      - POSTGRES_USER=${USER}
-      - POSTGRES_DATABASE=${DATABASE}
-      - POSTGRES_URL=${URL}
+      - POSTGRES_PASSWORD= PASSWORD
+      - POSTGRES_USER= qzwptyqr
+      - POSTGRES_DB= DATABASE
+      
     ports:
       - "5432:5432"
-    volumes:
-      - ./db/data:/var/lib/postgresql/data
 
+  flyway:
+    image: flyway/flyway
+    command: migrate
+    volumes:
+      - ./db:/flyway/sql
+      - ./db:/flyway/conf
+    environment:
+      - FLYWAY_BASELINE_ON_MIGRATE=true
+  
+    depends_on:
+      - postgres-database
+
+
+
+#
+# pg_ctl -D /var/lib/postgresql/data -l logfile start
+#version: '3.3'
+#POSTGRES_HOST_AUTH_METHOD=trust"
+
+#services:
+#  postgresql:
+#    image: postgres:latest
+#    restart: always
+#    volumes:
+#      - ./db/data:/var/lib/postgresql/data
+#    environment:
+#      - POSTGRES_SERVER=$SERVER
+#      - POSTGRES_PASSWORD=$PASSWORD
+#      - POSTGRES_USER=$USER
+#      - POSTGRES_DB=conversionhistory
+#      - POSTGRES_URL=$URL
+#    ports:
+#      - "5432:5432"
+#
 #  flyway:
 #    image: flyway/flyway
 #    command: migrate
 #    volumes:
 #      - ./db:/flyway/sql
 #      - ./db:/flyway/conf
-#    depends_on: 
+#    depends_on:
 #      - postgresql
+#

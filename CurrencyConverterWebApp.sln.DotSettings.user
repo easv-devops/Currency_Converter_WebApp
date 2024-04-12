@@ -6,8 +6,34 @@
   &lt;Assembly Path="C:\Users\doini\3rd semester\Home_Work_Doina\CurrencyConverterWebApp\test\bin\Debug\net8.0\testcentric.engine.metadata.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
 	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\doini\AppData\Local\JetBrains\Rider2023.2\resharper-host\temp\Rider\vAny\CoverageData\_CurrencyConverterWebApp.-1217843702\Snapshot\snapshot.utdcvr</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=5d97e0ed_002D263f_002D4b5e_002D9ebd_002D28914ed88245/@EntryIndexedValue">&lt;SessionState ContinuousTestingIsOn="True" ContinuousTestingMode="1" IsActive="True" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=0cf3a777_002Dd44c_002D4464_002D8361_002D5016c03b4595/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="UtilitiesTests #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::FDD99DE7-3957-42E1-BEFA-7E5EECADAAB7::net8.0::test.UtilitiesTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1dad9cb8_002Dfd7d_002D4342_002D877c_002D3fa4a9d06a28/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="UtilitiesTests #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::FDD99DE7-3957-42E1-BEFA-7E5EECADAAB7::net8.0::test.UtilitiesTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::FDD99DE7-3957-42E1-BEFA-7E5EECADAAB7::net8.0::ConverterServiceTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::FDD99DE7-3957-42E1-BEFA-7E5EECADAAB7::net8.0::api.Tests.ConversionControllerTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::FDD99DE7-3957-42E1-BEFA-7E5EECADAAB7::net8.0::test.ConversionControllerTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::FDD99DE7-3957-42E1-BEFA-7E5EECADAAB7::net8.0::test.ModelTest+ConversionHistoryTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::FDD99DE7-3957-42E1-BEFA-7E5EECADAAB7::net8.0::HistoryControllerTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::FDD99DE7-3957-42E1-BEFA-7E5EECADAAB7::net8.0::ConversionControllerTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4b5456cc_002D4f0d_002D411f_002D9386_002D862734cde437/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="UtilitiesTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::FDD99DE7-3957-42E1-BEFA-7E5EECADAAB7::net8.0::test.UtilitiesTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=5d97e0ed_002D263f_002D4b5e_002D9ebd_002D28914ed88245/@EntryIndexedValue">&lt;SessionState ContinuousTestingIsOn="True" ContinuousTestingMode="1" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Solution /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=5ed65340_002Ddb46_002D46ad_002Da85e_002D3f6e0e1a4076/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="UtilitiesTests #4" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::FDD99DE7-3957-42E1-BEFA-7E5EECADAAB7::net8.0::test.UtilitiesTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f360ca5b_002Dfe6b_002D4937_002Db2f9_002De1270c7c834c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="UnitTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;

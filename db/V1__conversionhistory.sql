@@ -1,4 +1,4 @@
-﻿create table conversion
+﻿create table conversionhistory
 (
     id serial primary key,
     sourcecurrency  varchar(3),
