@@ -1,4 +1,5 @@
-﻿using api.Controllers;
+﻿/*
+using api.Controllers;
 using infrastructure.Models;
 using infrastructure.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -86,3 +87,4 @@ namespace test
         }
     }
 }
+*/

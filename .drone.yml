@@ -64,7 +64,7 @@ steps:
     image: flyway/flyway
     commands:
       - flyway migrate
-        -url=jdbc:postgresql://144.91.75.24:5432/conversionhistory
+        -url=jdbc:postgresql://144.91.75.24:5432/cc
         -user=user
         -password=password
         -locations=filesystem:./db/sql
