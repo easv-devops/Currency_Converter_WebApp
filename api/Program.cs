@@ -1,103 +1,76 @@
-
-using Microsoft.Net.Http.Headers;
 using api.Helper;
 using infrastructure;
 using infrastructure.Repository;
 using service;
+using SameSiteMode = Microsoft.AspNetCore.Http.SameSiteMode;
 
-namespace api
+var builder = WebApplication.CreateBuilder(args);
+// Enable Session
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
 {
-    public static class Startup
-    {
-        public static void Main(string[] args)
-        {
-            var webApp = Start(args);
-            webApp.Run();
-        }
+    options.IdleTimeout = TimeSpan.FromHours(4);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+    options.Cookie.SameSite = SameSiteMode.Strict;
+});
 
-        public static WebApplication Start(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+//SETUP 
 
-            if (builder.Environment.IsDevelopment())
-            {
-                builder.Services.AddNpgsqlDataSource(Utilities.ProperlyFormattedConnectionString,
-                    dataSourceBuilder => dataSourceBuilder.EnableParameterLogging());
-            }
-
-            if (builder.Environment.IsProduction())
-            {
-                builder.Services.AddNpgsqlDataSource(Utilities.ProperlyFormattedConnectionString);
-            }
-
-            builder.Services.AddSingleton<ConverterService>();
-            builder.Services.AddSingleton<HistoryService>();
-            builder.Services.AddSingleton<ConvRepository>();
-            builder.Services.AddSingleton<ResponseHelper>();
-
-            builder.Services.AddControllers();
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-
-            var frontEndRelativePath = "./../frontend/";
-
-            builder.Services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "./../frontend/";
-            });
-
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy("AllowOrigin",
-                    builder => builder
-                        .AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader());
-            });
-
-            var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
-            app.UseSwagger();
-            app.UseSwaggerUI();
-
-            app.UseCors(options =>
-            {
-                options.SetIsOriginAllowed(origin => true)
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials();
-            });
-
-            app.UseSpaStaticFiles(new StaticFileOptions()
-            {
-                OnPrepareResponse = ctx =>
-                {
-                    const int durationInSeconds = 60 * 60 * 24;
-                    ctx.Context.Response.Headers[HeaderNames.CacheControl] =
-                        "public,max-age=" + durationInSeconds;
-                }
-            });
-
-            app.Map("/frontend",
-                (IApplicationBuilder frontendApp) =>
-                {
-                    frontendApp.UseSpa(spa =>
-                    {
-                        spa.Options.SourcePath = "./app/";
-                    });
-                });
-
-            app.UseSpaStaticFiles();
-            app.UseSpa(conf =>
-            {
-                conf.Options.SourcePath = frontEndRelativePath;
-            });
-
-            app.MapControllers();
-            //app.UseMiddleware<ExceptionHandlingMiddleware>();
-
-            return app;
-        }
-    }
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddNpgsqlDataSource(Utilities.ProperlyFormattedConnectionString,
+        dataSourceBuilder => dataSourceBuilder.EnableParameterLogging()); 
 }
+
+if (builder.Environment.IsProduction())
+{
+    builder.Services.AddNpgsqlDataSource(Utilities.ProperlyFormattedConnectionString);
+}
+
+//SETUP REPOSITORIES
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddSingleton<ConvRepository>();
+
+
+//NON-API SERVICES
+builder.Services.AddSingleton<ConverterService>();
+builder.Services.AddSingleton<HistoryService>();
+builder.Services.AddSingleton<ResponseHelper>();
+
+
+//MIDDLEWARE
+builder.Services.AddCors();
+
+//SETUP OTHER SERVICES
+builder.Services.AddControllers();
+
+if (builder.Environment.IsDevelopment())
+{
+    //FOR SWAGGER / OPENAPI IN DEV MODE
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
+}
+
+var app = builder.Build();
+
+app.UseSession();
+
+app.UseCors(options =>
+{
+    options.SetIsOriginAllowed(origin => true)
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials();
+});
+
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.MapControllers();
+app.Run();
