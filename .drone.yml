@@ -60,16 +60,16 @@ steps:
         
         
 
-#  - name: update database
-#    image: flyway/flyway
-#    commands:
-#      - flyway migrate
-#        -url=jdbc:postgresql://144.91.75.24:5432/cc
-#        -user=user
-#        -password=password
-#        -locations=filesystem:./db/sql
-#    depends_on:
-#        - trigger update
+  - name: update database
+    image: flyway/flyway
+    commands:
+      - flyway migrate
+        -url=jdbc:postgresql://144.91.75.24:5432/cc
+        -user=user
+        -password=password
+        -locations=filesystem:./db/sql
+    depends_on:
+        - trigger update
 
 
 
@@ -78,8 +78,8 @@ steps:
     commands:
         - k6 run tests/spike-conv.js
         - k6 run tests/history-test.js
-#    depends_on:
-#        - update database
+    depends_on:
+        - update database
 
 
 
@@ -88,5 +88,5 @@ steps:
     commands:
         - testcafe chromium:headless tests/e2e.js
         - testcafe chromium:headless tests/e2e.conv.js
-#    depends_on:
-#        - update database
+    depends_on:
+        - update database
