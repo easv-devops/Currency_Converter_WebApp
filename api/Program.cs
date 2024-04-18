@@ -40,10 +40,11 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowOrigin",
         builder => builder
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
 });
+
 
 var app = builder.Build();
 
