@@ -1,4 +1,4 @@
-﻿/*
+﻿
 using NUnit.Framework;
 using service;
 
@@ -97,4 +97,4 @@ namespace test
         }
     }
 }
-*/
+
