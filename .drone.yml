@@ -13,7 +13,7 @@ steps:
         /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml /d:sonar.qualitygate.wait=true
       - dotnet build --no-incremental
       - dotnet-coverage collect "dotnet test" -f xml -o "coverage.xml"
-      - dotnet sonarscanner end /d:sonar.token="$SONARSECRET" # is secret what i set in sonarQube
+      - dotnet sonarscanner end /d:sonar.token="$SONARSECRET"
 ---
 
 kind: pipeline
@@ -50,8 +50,7 @@ steps:
         - staging
 
   - name: trigger update
-    image: curlimages/curl    #Https is not clear how is has to be ,and is key from test environment??
-    # token from Drone account????
+    image: curlimages/curl
     commands:
       - "curl --fail -X GET 'http://144.91.75.24:8080/v1/update' -H 'Authorization: Bearer mytoken'" # Must match the token defined in docker-compose.yml
       - sleep 10
@@ -63,8 +62,8 @@ steps:
     image: flyway/flyway
     commands:
       - flyway migrate
-        -url=jdbc:postgresql://144.91.75.24:5432/conversionhistory # test environment(server) + 5432 database + table name???????
-        -user=user                 #numele de utilizator si parola trebuie sa corespunda cu setarea de la baza de date din docker-compose
+        -url=jdbc:postgresql://144.91.75.24:5432/conversionhistory
+        -user=user
         -password=password
         -locations=filesystem:./db/sql
     depends_on:
