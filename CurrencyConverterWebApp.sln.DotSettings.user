@@ -4,6 +4,7 @@
   &lt;Assembly Path="C:\Users\doini\3rd semester\Home_Work_Doina\CurrencyConverterWebApp\test\bin\Debug\net8.0\api.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Users\doini\3rd semester\Home_Work_Doina\CurrencyConverterWebApp\test\bin\Debug\net8.0\test.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Users\doini\3rd semester\Home_Work_Doina\CurrencyConverterWebApp\test\bin\Debug\net8.0\testcentric.engine.metadata.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Users\doini\3rd semester\Home_Work_Doina\CurrencyConverterWebApp\api\bin\Debug\net8.0\api.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
 	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\doini\AppData\Local\JetBrains\Rider2023.2\resharper-host\temp\Rider\vAny\CoverageData\_CurrencyConverterWebApp.-1217843702\Snapshot\snapshot.utdcvr</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=0cf3a777_002Dd44c_002D4464_002D8361_002D5016c03b4595/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="UtilitiesTests #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;

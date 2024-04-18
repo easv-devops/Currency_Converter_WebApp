@@ -5,7 +5,7 @@ name: integration
 steps:
   - name: code_analysis
     image: boulundeasv/dotnet-sdk-with-java
-    environment: 
+    environment:
       SONARSECRET:
         from_secret: SonarQubeSecret
     commands:
@@ -13,4 +13,79 @@ steps:
         /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml /d:sonar.qualitygate.wait=true
       - dotnet build --no-incremental
       - dotnet-coverage collect "dotnet test" -f xml -o "coverage.xml"
-      - dotnet sonarscanner end /d:sonar.token="$SONARSECRET"
+      - dotnet sonarscanner end /d:sonar.token="$SONARSECRET" # is secret what i set in sonarQube
+---
+
+kind: pipeline
+type: docker
+name: deliver
+depends_on:
+  - integration
+
+steps:
+  - name: publish api
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: DockerUsername
+      password:
+        from_secret: DockerPassword
+      context: .
+      dockerfile: api/Dockerfile
+      repo: doina1992/cd-converter-api
+      tags:
+        - staging
+
+  - name: publish web
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: DockerUsername 
+      password:
+        from_secret: DockerPassword
+      context: .     
+      dockerfile: frontend/Dockerfile
+      repo: doina1992/cd-weather-web
+      tags:
+        - staging
+
+  - name: trigger update
+    image: curlimages/curl    #Https is not clear how is has to be ,and is key from test environment??
+    # token from Drone account????
+    commands:
+      - "curl --fail -X GET 'http://144.91.75.24:8080/v1/update' -H 'Authorization: Bearer mytoken'" # Must match the token defined in docker-compose.yml
+      - sleep 10
+    depends_on:
+      - publish api
+      - publish web
+
+  - name: update database
+    image: flyway/flyway
+    commands:
+      - flyway migrate
+        -url=jdbc:postgresql://144.91.75.24:5432/conversionhistory # test environment(server) + 5432 database + table name???????
+        -user=user                 #numele de utilizator si parola trebuie sa corespunda cu setarea de la baza de date din docker-compose
+        -password=password
+        -locations=filesystem:./db/sql
+    depends_on:
+      - trigger update
+        
+        
+      
+  - name: performance tests
+    image: grafana/k6
+    commands:
+        - k6 run tests/spike-conv.js
+        - k6 run tests/history-test.js
+    depends_on:
+        - update database
+          
+          
+
+  - name: end-to-end tests
+    image: testcafe/testcafe
+    commands:
+        - testcafe chromium:headless tests/e2e.js
+        - testcafe chromium:headless tests/e2e.conv.js
+    depends_on:
+        - update database

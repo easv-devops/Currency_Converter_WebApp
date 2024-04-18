@@ -2,8 +2,13 @@
 
 
 
-
-    public static class Utilities
+public class Utilities
+{
+    private static readonly string DBPassword = new(Environment.GetEnvironmentVariable("PASSWORD"));
+    public static readonly string connectionStringDev = "Server=localhost:5432;Database=postgres;User Id=postgres;Password=" + DBPassword + ";";
+    public static readonly string connectionStringProd = "Server=app-database:5432;Database=postgres;User Id=postgres;Password=" + DBPassword + ";";
+}
+    /*public static class Utilities
     {
         private static readonly string? PgConn = Environment.GetEnvironmentVariable("pgconn");
 
@@ -16,4 +21,4 @@
             Uri.UserInfo.Split(':')[0],
             Uri.UserInfo.Split(':')[1],
             Uri.Port > 0 ? Uri.Port : 5432);
-    }
+    }*/

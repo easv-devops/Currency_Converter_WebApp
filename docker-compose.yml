@@ -1,19 +1,18 @@
-﻿
-version: '3.3'
+﻿version: '3.3'
 
 services:
+  
   postgres-database:
     image: postgres:latest
     restart: always
-    volumes:
-      - ./db/data:/var/lib/postgresql
     environment:
-      - POSTGRES_PASSWORD= PASSWORD
-      - POSTGRES_USER= qzwptyqr
-      - POSTGRES_DB= DATABASE
-      
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: cc
     ports:
       - "5432:5432"
+    volumes:
+      - ./db/data:/var/lib/postgresql/data
 
   flyway:
     image: flyway/flyway
@@ -21,10 +20,50 @@ services:
     volumes:
       - ./db:/flyway/sql
       - ./db:/flyway/conf
-    environment:
-      - FLYWAY_BASELINE_ON_MIGRATE=true
-  
     depends_on:
       - postgres-database
+    
+  
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    image: conversion-frontend:staging
+    ports:
+      - "5001:8080"
+    depends_on:
+      - api
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true" 
 
 
+
+  api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    image: conversion-backend:staging
+
+    ports:
+      - "5100:8080"
+    hostname: api
+    depends_on:
+        - postgres-database
+    labels:
+        - "com.centurylinklabs.watchtower.enable=true"
+
+  
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --debug --http-api-update
+    environment:
+      - WATCHTOWER_HTTP_API_TOKEN=mytoken
+      - WARCHTOWER_LABEL_ENABLE=true
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
+    ports:
+      - 8080:8080
+  
+  
