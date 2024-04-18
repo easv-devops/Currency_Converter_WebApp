@@ -21,13 +21,13 @@ namespace api
 
             if (builder.Environment.IsDevelopment())
             {
-                builder.Services.AddNpgsqlDataSource(Utilities.connectionStringDev,
+                builder.Services.AddNpgsqlDataSource(Utilities.ProperlyFormattedConnectionString,
                     dataSourceBuilder => dataSourceBuilder.EnableParameterLogging());
             }
 
             if (builder.Environment.IsProduction())
             {
-                builder.Services.AddNpgsqlDataSource(Utilities.connectionStringProd);
+                builder.Services.AddNpgsqlDataSource(Utilities.ProperlyFormattedConnectionString);
             }
 
             builder.Services.AddSingleton<ConverterService>();
