@@ -9,7 +9,11 @@ steps:
       SONARSECRET:
         from_secret: SonarQubeSecret
     commands:
-      - dotnet sonarscanner begin /k:"easv-devops_Currency_Converter_WebApp_AY7wP4O_EVvRW2O60Eyq" /d:sonar.host.url="http://sonar.setgo.dk:9000"  /d:sonar.token="sqp_2b73b7da30855bc82a3043854c060f219dc76a4b"
+      - dotnet sonarscanner begin
+      - /k:"easv-devops_Currency_Converter_WebApp_AY7wP4O_EVvRW2O60Eyq"
+      - /d:sonar.host.url="http://sonar.setgo.dk:9000"
+      - /d:sonar.token="$SONARSECRET"
+      - /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
       - dotnet build --no-incremental
       - dotnet-coverage collect "dotnet test" -f xml -o "coverage.xml"
       - dotnet sonarscanner end /d:sonar.token="$SONARSECRET"
@@ -60,16 +64,14 @@ steps:
       - publish web
 
 
-
-
   - name: update database
     image: flyway/flyway
     commands:
-      - flyway migrate
-        -url=jdbc:postgresql://144.91.75.24:5432/cc
-        -user=user
-        -password=password
-        -locations=filesystem:./db
+        - flyway migrate
+          -url=jdbc:mariadb://144.91.75.24:5432/cc
+          -user=user
+          -password=password
+          -locations=filesystem:./db/sql
     depends_on:
         - trigger update
 
