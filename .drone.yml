@@ -45,48 +45,50 @@ steps:
         from_secret: DockerPassword
       context: .     
       dockerfile: frontend/Dockerfile
-      repo: doina1992/cd-weather-web
+      repo: doina1992/cd-conversion-web
       tags:
         - staging
-#
-#  - name: trigger update
-#    image: curlimages/curl
-#    commands:
-#        - "curl --fail -X GET 'http://144.91.75.24:8080/v1/update' -H 'Authorization: Bearer mytoken'" # Must match the token defined in docker-compose.yml
-#        - sleep 10
-#    depends_on:
-#        - publish api
-#        - publish web
-#        
-#        
-#
-#  - name: update database
-#    image: flyway/flyway
-#    commands:
-#      - flyway migrate
-#        -url=jdbc:postgresql://144.91.75.24:5432/cc
-#        -user=user
-#        -password=password
-#        -locations=filesystem:./db
-#    depends_on:
-#        - trigger update
-#
-#
-#
-#  - name: performance tests
-#    image: grafana/k6
-#    commands:
-#        - k6 run tests/spike-conv.js
-#        - k6 run tests/history-test.js
-#    depends_on:
-#        - update database
-#
-#
-#
-#  - name: end-to-end tests
-#    image: testcafe/testcafe
-#    commands:
-#        - testcafe chromium:headless tests/e2e.js
-#        - testcafe chromium:headless tests/e2e.conv.js
-#    depends_on:
-#        - update database
+        
+        
+  - name: trigger update
+    image: curlimages/curl
+    commands:
+      - "curl --fail -X GET 'http://144.91.75.24:8080/v1/update' -H 'Authorization: Bearer mytoken'" # Replace with your Termius IP address and token
+      - sleep 10
+    depends_on:
+      - publish api
+      - publish web
+
+
+
+
+  - name: update database
+    image: flyway/flyway
+    commands:
+      - flyway migrate
+        -url=jdbc:postgresql://144.91.75.24:5432/cc
+        -user=user
+        -password=password
+        -locations=filesystem:./db
+    depends_on:
+        - trigger update
+
+
+
+  - name: performance tests
+    image: grafana/k6
+    commands:
+        - k6 run tests/spike-conv.js
+        - k6 run tests/history-test.js
+    depends_on:
+        - update database
+
+
+
+  - name: end-to-end tests
+    image: testcafe/testcafe
+    commands:
+        - testcafe chromium:headless tests/e2e.js
+        - testcafe chromium:headless tests/e2e.conv.js
+    depends_on:
+        - update database
