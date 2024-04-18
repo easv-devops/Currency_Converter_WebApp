@@ -13,6 +13,8 @@
     &lt;TestId&gt;NUnit3x::FDD99DE7-3957-42E1-BEFA-7E5EECADAAB7::net8.0::test.ProgramTest.Run_DoesNotThrowException&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::FDD99DE7-3957-42E1-BEFA-7E5EECADAAB7::net8.0::test.UtilitiesTest.ProperlyFormattedConnectionString_IsGeneratedCorrectly&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::FDD99DE7-3957-42E1-BEFA-7E5EECADAAB7::net8.0::test.UtilitiesTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::FDD99DE7-3957-42E1-BEFA-7E5EECADAAB7::net8.0::test.ProgramTests.TestCorsConfiguration&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::FDD99DE7-3957-42E1-BEFA-7E5EECADAAB7::net8.0::test.ProgramTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1dad9cb8_002Dfd7d_002D4342_002D877c_002D3fa4a9d06a28/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="UtilitiesTests #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;

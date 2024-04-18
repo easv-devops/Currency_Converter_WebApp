@@ -26,6 +26,4 @@ public class UtilitiesTest
             Is.EqualTo(
                 "Server=localhost;DataBase=database;User Id=user;Password=password;Port=5432;Pooling=true;MaxPoolSize=3"));
     }
-
-  
 }
