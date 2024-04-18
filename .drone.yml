@@ -53,7 +53,7 @@ steps:
   - name: trigger update
     image: curlimages/curl
     commands:
-      - "curl --fail -X GET 'http://144.91.75.24:8080/v1/update' -H 'Authorization: Bearer mytoken'" # Replace with your Termius IP address and token
+      - "curl --fail -X GET 'http://95.111.247.237:8080/v1/update' -H 'Authorization: Bearer mytoken'"
       - sleep 10
     depends_on:
       - publish api
@@ -64,7 +64,7 @@ steps:
     image: flyway/flyway
     commands:
         - flyway migrate
-          -url=jdbc:postgresql://144.91.75.24:5432/cc
+          -url=jdbc:postgresql://postgres-database/cc
           -user=user
           -password=password
           -locations=filesystem:./db/sql
