@@ -4,7 +4,7 @@ using infrastructure.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Playwright;
 using NUnit.Framework;
-using service;
+
 
 namespace test;
 

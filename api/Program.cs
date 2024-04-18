@@ -40,7 +40,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowOrigin",
         builder => builder
-            .AllowAnyOrigin()
+            .WithOrigins("https://trustedwebsite.com", "https://anothertrustedwebsite.com") 
             .AllowAnyMethod()
             .AllowAnyHeader());
 });
