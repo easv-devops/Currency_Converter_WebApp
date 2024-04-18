@@ -1,4 +1,4 @@
-﻿/*
+﻿
 using api.Controllers;
 using infrastructure.Models;
 using infrastructure.Repository;
@@ -87,4 +87,4 @@ namespace test
         }
     }
 }
-*/
+
