@@ -45,7 +45,7 @@ steps:
         from_secret: DockerPassword
       context: .     
       dockerfile: frontend/Dockerfile
-      repo: doina1992/cd-conversion-web
+      repo: doina1992/cd-converter-web
       tags:
         - staging
         
@@ -63,7 +63,7 @@ steps:
   - name: update database
     image: flyway/flyway
     commands:
-      -flyway migrate
+      - flyway migrate
         -url=jdbc:postgresql://144.91.75.24:5432/cc
         -user=user
         -password=password
@@ -111,7 +111,7 @@ steps:
           from_secret: DockerPassword
         context: .
         dockerfile: api/Dockerfile
-        repo: doina1992/cd-conversion-api
+        repo: doina1992/cd-converter-api
         tags:
           - prod
 
@@ -124,7 +124,7 @@ steps:
           from_secret: DockerPassword
         context: .
         dockerfile: frontend/Dockerfile
-        repo: doina1992/cd-conversion-web
+        repo: doina1992/cd-converter-web
         tags:
           - prod
 
