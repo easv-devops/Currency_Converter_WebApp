@@ -6,20 +6,19 @@ namespace test
 {
     public class ConverterServiceTests
     {
-        [Test]
-        public void ConvertCurrency_ShouldReturnCorrectConversion_WhenValidCurrenciesAndAmountAreProvided()
+        [TestCase(100, "USD", "EUR", 93)] 
+        [TestCase(0, "USD", "EUR", 0)]
+        [TestCase(0, "EUR", "EUR", 0)]
+        [TestCase(20, "USD", "USD", 20)] 
+        public void ConvertCurrency_ShouldReturnCorrectConversion(decimal amount, string fromCurrency, string toCurrency, decimal expectedConversion)
         {
             // Arrange
             var converterService = new ConverterService();
-            decimal amount = 100;
-            string fromCurrency = "USD";
-            string toCurrency = "EUR";
-
             // Act
             decimal result = converterService.ConvertCurrency(amount, fromCurrency, toCurrency);
 
             // Assert
-            Assert.That(result, Is.EqualTo(93));
+            Assert.That(result, Is.EqualTo(expectedConversion));
         }
 
         [Test]
