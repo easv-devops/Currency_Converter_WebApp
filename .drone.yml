@@ -63,11 +63,10 @@ steps:
   - name: update database
     image: flyway/flyway
     commands:
-        - flyway migrate
-          -url=jdbc:postgresql://144.91.75.24:5432/cc
-          -user=user
-          -password=password
-          -locations=filesystem:./db/sql
+      -flyway migrate -url=jdbc:postgresql://144.91.75.24:5432/cc
+      -user=user
+      -password=password
+      -locations=filesystem:./db/sql
     depends_on:
       - trigger update
 
@@ -90,3 +89,60 @@ steps:
         - testcafe chromium:headless tests/e2e.conv.js
     depends_on:
         - update database
+          
+          
+---
+
+
+  kind: pipeline
+  type: docker
+  name: deploy
+  depends_on:
+    - deliver
+
+  steps: 
+    - name: release api
+      image: plugins/docker
+      settings:
+        username:
+          from_secret: DockerUsername
+        password:
+          from_secret: DockerPassword
+        context: .
+        dockerfile: api/Dockerfile
+        repo: doina1992/cd-converter-api
+        tags:
+          - prod
+
+    - name: release web
+      image: plugins/docker
+      settings:
+        username:
+          from_secret: DockerUsername
+        password:
+          from_secret: DockerPassword
+        context: .
+        dockerfile: frontend/Dockerfile
+        repo: doina1992/cd-conversion-web
+        tags:
+          - prod
+
+    - name: trigger update
+      image: curlimages/curl
+      commands:
+        - "curl -X GET 'http://95.111.247.237:8080/v1/update' -H 'Authorization: Bearer mytoken'" # Must match the token defined in docker-compose.yml
+        - sleep 10
+      depends_on:
+        - release api
+        - release web
+
+    - name: update database
+      image: flyway/flyway
+      commands:
+        - flyway migrate
+          -url=jdbc:postgresql://95.111.247.237:5432/cc
+          -user=user
+          -password=password
+          -locations=filesystem:./db/sql
+      depends_on:
+        - trigger update

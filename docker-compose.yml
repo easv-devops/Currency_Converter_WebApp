@@ -28,7 +28,7 @@ services:
     build:
       context: .
       dockerfile: frontend/Dockerfile
-    image: conversion-frontend:staging
+    image: doina1992/cd-conversion-web:staging
     ports:
       - "5001:8080"
     depends_on:
@@ -42,7 +42,7 @@ services:
     build:
       context: .
       dockerfile: api/Dockerfile
-    image: conversion-backend:staging
+    image: doina1992/cd-converter-api:staging
 
     ports:
       - "5100:8080"
