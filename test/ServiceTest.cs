@@ -1,16 +1,16 @@
-﻿
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using service;
 
-namespace test 
+namespace test
 {
     public class ConverterServiceTests
     {
-        [TestCase(100, "USD", "EUR", 93)] 
+        [TestCase(100, "USD", "EUR", 93)]
         [TestCase(0, "USD", "EUR", 0)]
         [TestCase(0, "EUR", "EUR", 0)]
-        [TestCase(20, "USD", "USD", 20)] 
-        public void ConvertCurrency_ShouldReturnCorrectConversion(decimal amount, string fromCurrency, string toCurrency, decimal expectedConversion)
+        [TestCase(20, "USD", "USD", 20)]
+        public void ConvertCurrency_ShouldReturnCorrectConversion(decimal amount, string fromCurrency,
+            string toCurrency, decimal expectedConversion)
         {
             // Arrange
             var converterService = new ConverterService();
@@ -64,7 +64,8 @@ namespace test
         }
 
         [Test]
-        public void ConvertCurrency_ShouldReturnCorrectConversion_WhenValidCurrenciesAndAmountAreProvided_WithDifferentRates()
+        public void
+            ConvertCurrency_ShouldReturnCorrectConversion_WhenValidCurrenciesAndAmountAreProvided_WithDifferentRates()
         {
             // Arrange
             var converterService = new ConverterService();
@@ -94,6 +95,87 @@ namespace test
             // Assert
             Assert.That(result, Is.EqualTo(0));
         }
+
+
+        [Test]
+        public void ConvertCurrency_ShouldHandleLargeAmountsCorrectly()
+        {
+            // Arrange
+            var converterService = new ConverterService();
+            decimal amount = 999999999; 
+            string fromCurrency = "USD";
+            string toCurrency = "EUR";
+
+            // Act
+            decimal result = converterService.ConvertCurrency(amount, fromCurrency, toCurrency);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(999999999 * 0.93)); 
+        }
+
+        [Test]
+        public void ConvertCurrency_ShouldHandleNegativeAmountsCorrectly()
+        {
+            // Arrange
+            var converterService = new ConverterService();
+            decimal amount = -100; 
+            string fromCurrency = "USD";
+            string toCurrency = "EUR";
+
+            // Act
+            decimal result = converterService.ConvertCurrency(amount, fromCurrency, toCurrency);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(-93)); 
+        }
+        
+        [Test]
+        public void ConvertCurrency_ShouldHandleSameCurrencyConversionCorrectly()
+        {
+            // Arrange
+            var converterService = new ConverterService();
+            decimal amount = 100;
+            string currency = "USD"; 
+            string fromCurrency = currency;
+            string toCurrency = currency;
+
+            // Act
+            decimal result = converterService.ConvertCurrency(amount, fromCurrency, toCurrency);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(amount)); 
+        }
+
+        [Test]
+        public void ConvertCurrency_ShouldHandleRoundingCorrectly()
+        {
+            // Arrange
+            var converterService = new ConverterService();
+            decimal amount = 100;
+            string fromCurrency = "USD";
+            string toCurrency = "EUR";
+
+            // Act
+            decimal result = converterService.ConvertCurrency(amount, fromCurrency, toCurrency);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(93.00)); 
+        }
+
+        [Test]
+        public void ConvertCurrency_ShouldHandleEdgeCaseCurrenciesCorrectly()
+        {
+            // Arrange
+            var converterService = new ConverterService();
+            decimal amount = 100;
+            string fromCurrency = "USD";
+            string toCurrency = "USD"; 
+
+            // Act
+            decimal result = converterService.ConvertCurrency(amount, fromCurrency, toCurrency);
+
+            // Assert
+            Assert.That(result, Is.EqualTo(amount)); 
+        }
     }
 }
-
