@@ -1,24 +1,24 @@
-services:
-  frontenhub:
-    image: doina1992/cd-converter-web:prod
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-
-  api:
-    image: doina1992/cd-converter-api:prod
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-
-  watchtower:
-    image: containrrr/watchtower
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: --debug --http-api-update
-    environment:
-      - WATCHTOWER_HTTP_API_TOKEN=mytoken
-      - WATCHTOWER_LABEL_ENABLE=true
-    labels:
-      - "com.centurylinklabs.watchtower.enable=false"
+#services:
+#  frontenhub:
+#    image: doina1992/cd-converter-web:prod
+#    labels:
+#      - "com.centurylinklabs.watchtower.enable=true"
+#
+#  api:
+#    image: doina1992/cd-converter-api:prod
+#    labels:
+#      - "com.centurylinklabs.watchtower.enable=true"
+#
+#  watchtower:
+#    image: containrrr/watchtower
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#    command: --debug --http-api-update
+#    environment:
+#      - WATCHTOWER_HTTP_API_TOKEN=mytoken
+#      - WATCHTOWER_LABEL_ENABLE=true
+#    labels:
+#      - "com.centurylinklabs.watchtower.enable=false"
 
 #  featurehub:
 #    image: featurehub/party-server:latest
