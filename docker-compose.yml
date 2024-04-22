@@ -26,7 +26,7 @@ services:
     build:
       context: .
       dockerfile: frontend/Dockerfile
-    image: doina1992/cd-conversion-web:staging
+    image: conversion-backend:staging
     ports:
       - "5001:8080"
     depends_on:
@@ -34,13 +34,11 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true" 
 
-
-
   api:
     build:
       context: .
       dockerfile: api/Dockerfile
-    image: doina1992/cd-converter-api:staging
+    image: conversion-frontend:staging
 
     ports:
       - "5100:8080"

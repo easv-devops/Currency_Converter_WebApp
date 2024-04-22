@@ -111,7 +111,7 @@ steps:
           from_secret: DockerPassword
         context: .
         dockerfile: api/Dockerfile
-        repo: doina1992/cd-converter-api
+        repo: doina1992/cd-conversion-api
         tags:
           - prod
 
