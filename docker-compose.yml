@@ -1,7 +1,5 @@
 ﻿
-
 services:
-  
   postgres-database:
     image: postgres:latest
     restart: always
