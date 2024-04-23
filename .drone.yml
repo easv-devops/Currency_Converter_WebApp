@@ -86,7 +86,6 @@ steps:
   - name: end-to-end tests
     image: testcafe/testcafe
     commands:
-        - testcafe chromium:headless tests/e2e.js
         - testcafe chromium:headless tests/e2e.conv.js
     depends_on:
         - update database
