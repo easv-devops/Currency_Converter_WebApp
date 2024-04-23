@@ -1,9 +1,9 @@
-﻿/*
+﻿
 
 import {Selector} from 'testcafe';
 
 fixture`HistoryController End-to-End Test`
-    .page`http://144.91.75.24:5001/`
+    .page`http://http://localhost:5000`
     
 
 test('Should fetch conversion history successfully', async t => {
@@ -35,4 +35,4 @@ test('Should fetch conversion history successfully', async t => {
 });
 
 
-*/
+
