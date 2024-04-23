@@ -2,7 +2,7 @@
 import { Selector } from 'testcafe';
 
 fixture`ConversionController End-to-End Test`
-    .page`http://localhost:5000`
+    .page`http://http://144.91.75.24:5001/`
    
 
 
